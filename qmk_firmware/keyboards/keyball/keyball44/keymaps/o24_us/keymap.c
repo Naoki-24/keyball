@@ -97,7 +97,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case JP_SCLN:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
-          unregister(MOD_MASK_SHIFT);
+          unregister_mods(MOD_MASK_SHIFT);
           tap_code(JP_COLN);
           return false;
         }
