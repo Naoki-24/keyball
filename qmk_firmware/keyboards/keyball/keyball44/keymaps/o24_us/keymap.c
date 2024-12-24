@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                       KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , JP_EQL   ,
     KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINUS  ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
     CTL_LBRC , KC_Z     , KC_X     , KC_C     , KC_V     , LY1_SPC   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
-               KC_LGUI  , ALT_RBRC ,                   SFT_INT5 , KC_BTN1, LY3_INT4,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , JP_SCLN  ,
+               KC_LGUI  , ALT_RBRC ,                   SFT_INT5 , KC_BTN1, LY3_INT4,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , JP_SCLN
   ),
 
   [1] = LAYOUT_universal(
@@ -70,7 +70,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case JP_MINS:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
-          tap_code(S(JP_BSLS));
+          register_code(KC_LSFT);
+          tap_code(JP_BSLS);
+          unregister_code(KC_LSFT);
           return false;
         }
       }
@@ -98,7 +100,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
         }
       }
-      return true;
     case JP_RBRC:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
@@ -124,6 +125,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
   }
+  return true;
 }
 
 // clang-format on
