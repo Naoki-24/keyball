@@ -21,6 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+#define CTL_LBRC MT(KC_LCTL, JP_LBRC)
+#define ALT_RBRC MT(KC_LALT, JP_RBRC)
+#define SFT_INT5 MT(KC_LSFT, KC_INT5)
+#define LY3_INT4 LT(3, KC_INT4)
+#define LY1_SPC LT(1, KC_SPACE)
+#define LY2_ENT LT(2, KC_ENT)
+
 enum my_keycodes {
   MY_BACK = SAFE_RANGE,
   MY_FORWARD
@@ -30,10 +37,10 @@ enum my_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
   [0] = LAYOUT_universal(
-    KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                        KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , JP_EQL   ,
-    KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINUS     ,                                        KC_K     , KC_T     , KC_N     , KC_S     , KC_H  , JP_QUOT  ,
-    MT(KC_LCTL, JP_LBRC), KC_Z     , KC_X     , KC_C     , KC_V     , LT(1,KC_SPACE),                               KC_G     , KC_D     , KC_M  , KC_J   , KC_B  , KC_SLASH  ,
-              KC_Left GUI,MT(KC_LALT, JP_RBRC), MT(KC_LSFT, KC_INT5)   ,KC_BTN1,   LT(3, KC_INT4),                               KC_BSPC,LT(2,KC_ENT), RCTL_T(KC_LNG2), JP_SCLN  , KC_PSCR,
+    KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                       KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , JP_EQL   ,
+    KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINUS  ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
+    CTL_LBRC , KC_Z     , KC_X     , KC_C     , KC_V     , LY1_SPC   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
+               KC_LGUI  , ALT_RBRC ,                   SFT_INT5 , KC_BTN1, LY3_INT4,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , JP_SCLN  ,
   ),
 
   [1] = LAYOUT_universal(
