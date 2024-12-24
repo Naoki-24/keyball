@@ -32,7 +32,7 @@ enum my_keycodes {
 
 #define CTL_LBRC MT(MOD_LCTL, MY_BRCT)
 #define SFT_INT5 MT(MOD_LSFT, KC_INT5)
-#define ALT_RIGHT MT(MOD_ALT, KC_LEFT)
+#define ALT_RIGHT MT(MOD_LALT, KC_LEFT)
 #define LY3_INT4 LT(3, KC_INT4)
 #define LY1_SPC LT(1, KC_SPACE)
 #define LY2_ENT LT(2, KC_ENT)
