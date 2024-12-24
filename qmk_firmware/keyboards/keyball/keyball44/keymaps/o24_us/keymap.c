@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
   [0] = LAYOUT_universal(
     KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                       KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , JP_EQL   ,
-    KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINUS  ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
+    KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINS   ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
     CTL_LBRC , KC_Z     , KC_X     , KC_C     , KC_V     , LY1_SPC   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
                KC_LGUI  , ALT_RBRC ,                   SFT_INT5 , KC_BTN1, LY3_INT4,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , JP_SCLN
   ),
@@ -70,9 +70,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case JP_MINS:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
-          register_code(KC_LSFT);
-          tap_code(JP_BSLS);
-          unregister_code(KC_LSFT);
+          tap_code16(JP_UNDS);
           return false;
         }
       }
@@ -88,7 +86,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case JP_QUOT:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
-          tap_code(JP_DQUO);
+          tap_code16(JP_DQUO);
           return false;
         }
       }
@@ -103,25 +101,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case JP_RBRC:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
-          tap_code(JP_RCBR);
+          tap_code16(JP_RCBR);
           return false;
         }
       }
       return true;
     case JP_LBRC:
       if (record->event.pressed) {
-        tap_code(JP_LCBR);
+        tap_code16(JP_LCBR);
         return false;
       }
       return true;
     case MY_BACK:
       if (record->event.pressed) {
-        tap_code(A(KC_LEFT));
+        tap_code16(A(KC_LEFT));
       }
       return false;
     case MY_FORWARD:
       if (record->event.pressed) {
-        tap_code(A(KC_RGHT));
+        tap_code16(A(KC_RGHT));
       }
       return false;
   }
