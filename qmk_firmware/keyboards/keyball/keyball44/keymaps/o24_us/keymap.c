@@ -78,7 +78,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case JP_EQL:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
-          tap_code(JP_PLUS);
+          tap_code16(JP_PLUS);
           return false;
         }
       }
