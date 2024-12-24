@@ -30,7 +30,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum my_keycodes {
   MY_BACK = SAFE_RANGE,
-  MY_FORWARD
+  MY_FORWARD,
+  MY_COPY,
+  MY_PASTE,
+  MY_CUT
 };
 
 // clang-format off
@@ -60,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [3] = LAYOUT_universal(
     RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  , _______  ,                                        RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN , RGB_M_K  ,
     RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , _______  , SCRL_DVI ,                                        RGB_M_X  , MY_BACK  , MY_FORWARD  , RGB_M_TW , _______  , _______  ,
-    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , _______  , SCRL_DVD ,                                        KC_CUT  ,  KC_COPY  , KC_PASTE  , CPI_I1K  , _______  , KBC_SAVE ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , _______  , SCRL_DVD ,                                        MY_CUT  ,  MY_COPY  , MY_PASTE  , CPI_I1K  , _______  , KBC_SAVE ,
                   QK_BOOT  , KBC_RST  , _______  ,        _______  , _______  ,                   _______  , _______  , _______       , KBC_RST  , QK_BOOT
   ),
 };
@@ -94,6 +97,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case JP_SCLN:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
+          unregister(MOD_MASK_SHIFT);
           tap_code(JP_COLN);
           return false;
         }
@@ -104,12 +108,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           tap_code16(JP_RCBR);
           return false;
         }
+        if (!record->tap.count) {
+          return true;
+        }
       }
       return true;
     case JP_LBRC:
       if (record->event.pressed) {
         tap_code16(JP_LCBR);
         return false;
+      }
+      if (!record->tap.count) {
+        return true;
       }
       return true;
     case MY_BACK:
@@ -120,6 +130,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MY_FORWARD:
       if (record->event.pressed) {
         tap_code16(A(KC_RGHT));
+      }
+      return false;
+    case MY_COPY:
+      if (record->event.pressed) {
+        tap_code16(C(KC_C));
+      }
+      return false;
+    case MY_CUT:
+      if (record->event.pressed) {
+        tap_code16(C(KC_X));
+      }
+      return false;
+    case MY_PASTE:
+      if (record->event.pressed) {
+        tap_code16(C(KC_V));
       }
       return false;
   }
