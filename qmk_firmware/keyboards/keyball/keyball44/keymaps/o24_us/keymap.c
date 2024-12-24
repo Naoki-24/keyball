@@ -21,20 +21,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-#define CTL_LBRC MT(KC_LCTL, JP_LBRC)
-#define ALT_RBRC MT(KC_LALT, JP_RBRC)
-#define SFT_INT5 MT(KC_LSFT, KC_INT5)
-#define LY3_INT4 LT(3, KC_INT4)
-#define LY1_SPC LT(1, KC_SPACE)
-#define LY2_ENT LT(2, KC_ENT)
-
 enum my_keycodes {
   MY_BACK = SAFE_RANGE,
   MY_FORWARD,
   MY_COPY,
   MY_PASTE,
-  MY_CUT
+  MY_CUT,
+  MY_BRCT
 };
+
+#define CTL_LBRC MT(MOD_LCTL, MY_BRCT)
+#define SFT_INT5 MT(MOD_LSFT, KC_INT5)
+#define ALT_RIGHT MT(MOD_ALT, KC_LEFT)
+#define LY3_INT4 LT(3, KC_INT4)
+#define LY1_SPC LT(1, KC_SPACE)
+#define LY2_ENT LT(2, KC_ENT)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -43,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                       KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , JP_EQL   ,
     KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINS   ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
     CTL_LBRC , KC_Z     , KC_X     , KC_C     , KC_V     , LY1_SPC   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
-               KC_LGUI  , ALT_RBRC ,                   SFT_INT5 , KC_BTN1, LY3_INT4,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , JP_SCLN
+               KC_LGUI  , ALT_RIGHT,                   SFT_INT5 , KC_BTN1, LY3_INT4,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , JP_SCLN
   ),
 
   [1] = LAYOUT_universal(
@@ -99,6 +100,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (get_mods() & MOD_MASK_SHIFT) {
           unregister_mods(MOD_MASK_SHIFT);
           tap_code(JP_COLN);
+          register_mods(MOD_MASK_SHIFT);
           return false;
         }
       }
@@ -147,6 +149,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code16(C(KC_V));
       }
       return false;
+    case MY_BRCT:
+      if (record->event.pressed) {
+        tap_code16(JP_LCBR);
+        tap_code16(JP_RCBR);
+        tap_code(KC_LEFT);
+        return false;
+      }
   }
   return true;
 }
