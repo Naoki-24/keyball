@@ -130,9 +130,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case MY_BRCT:
       if (record->event.pressed) {
-        tap_code(JP_LBRC);
-        tap_code(JP_RBRC);
-        tap_code(KC_LEFT);
+        if (get_mods() & MOD_MASK_SHIFT) {
+          SEND_STRING(SS_TAP(X_RBRACKET));
+          SEND_STRING(SS_TAP(X_NONUS_HASH));
+          SEND_STRING(SS_TAP(X_LEFT));
+        } else if (get_mods & MOD_MASK_CTRL) {
+          tap_code(JP_LBRC);
+        } else if (host_keyboard_led_state().compose) {
+          SEND_STRING(SS_LALT("[")"[");
+          SEND_STRING(SS_LALT("]")"]");
+          SEND_STRING(SS_TAP(X_LEFT));           
+        } else {
+          SEND_STRING("[]");
+          SEND_STRING(SS_TAP(X_LEFT));           
+        }
         return false;
       }
   }
