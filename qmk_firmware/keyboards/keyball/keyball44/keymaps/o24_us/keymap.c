@@ -32,7 +32,7 @@ enum my_keycodes {
 
 #define CTL_LBRC MT(MOD_LCTL, MY_BRCT)
 #define SFT_INT5 MT(MOD_LSFT, KC_INT5)
-#define ALT_RIGHT MT(MOD_LALT, KC_LEFT)
+#define ALT_RIGHT MT(MOD_LALT, KC_RGHT)
 #define LY3_INT4 LT(3, KC_INT4)
 #define LY1_SPC LT(1, KC_SPACE)
 #define LY2_ENT LT(2, KC_ENT)
@@ -78,7 +78,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
         }
       }
-      return true;
     case JP_EQL:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
@@ -110,20 +109,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           tap_code16(JP_RCBR);
           return false;
         }
-        if (!record->tap.count) {
-          return true;
-        }
       }
-      return true;
     case JP_LBRC:
       if (record->event.pressed) {
         tap_code16(JP_LCBR);
         return false;
       }
-      if (!record->tap.count) {
-        return true;
-      }
-      return true;
     case MY_BACK:
       if (record->event.pressed) {
         tap_code16(A(KC_LEFT));
@@ -151,8 +142,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case MY_BRCT:
       if (record->event.pressed) {
-        tap_code16(JP_LCBR);
-        tap_code16(JP_RCBR);
+        tap_code16(JP_LBRC);
+        tap_code16(JP_RBRC);
         tap_code(KC_LEFT);
         return false;
       }
