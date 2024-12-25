@@ -21,20 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-enum my_keycodes {
-  MY_BACK = SAFE_RANGE,
-  MY_FORWARD,
-  MY_COPY,
-  MY_PASTE,
-  MY_CUT
-};
-
 #define CTL_PRNS MT(MOD_LCTL, KC_8)
-#define SFT_INT5 MT(MOD_LSFT, KC_INT5)
+#define SFT_GRV MT(MOD_LSFT, KC_GRV)
 #define ALT_BRCS MT(MOD_LALT, KC_LBRC)
-#define LY3_INT4 LT(3, KC_INT4)
 #define LY1_SPC LT(1, KC_SPACE)
 #define LY2_ENT LT(2, KC_ENT)
+#define QWERTY DL(3)
+#define O24 DL(0)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -42,33 +35,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_universal(
     KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                       KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , JP_EQL   ,
     KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINS   ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
-    CTL_PRNS , KC_Z     , KC_X     , KC_C     , KC_V     , LY1_SPC   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
-               KC_LGUI  , ALT_BRCS,                   SFT_INT5 , KC_BTN1, LY3_INT4,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , JP_SCLN
+    CTL_PRNS , KC_Z     , KC_X     , KC_C     , KC_V     , JP_SCLN   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
+               KC_LGUI  , ALT_BRCS,                   SFT_GRV , KC_BTN1, LY1_SPC,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , QWERTY
   ),
 
   [1] = LAYOUT_universal(
-    SSNP_FRE ,  KC_F1   , KC_F2    , KC_F3   , KC_F4    , KC_F5    ,                                         KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   , KC_F11   ,
-    SSNP_VRT ,  _______ , _______  , KC_UP   , KC_ENT   , KC_DEL   ,                                         KC_PGUP  , KC_BTN1  , KC_UP    , KC_BTN2  , KC_BTN3  , KC_F12   ,
-    SSNP_HOR ,  _______ , KC_LEFT  , KC_DOWN , KC_RGHT  , KC_BSPC  ,                                         KC_PGDN  , KC_LEFT  , KC_DOWN  , KC_RGHT  , _______  , _______  ,
-                  _______  , _______ , _______  ,         _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+    KC_F1    ,  KC_F2   , KC_F3    , KC_F4   , KC_F5    , KC_F6    ,                                         KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   , KC_F11   ,
+    KC_F7    ,  KC_F8   , KC_F9    , KC_F10  , KC_F11   , KC_F12   ,                                         C(KC_A)  , KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_F12   ,
+    SSNP_HOR ,  _______ , KC_LEFT  , KC_DOWN , KC_RGHT  , KC_BSPC  ,                                         C(KC_Z)  , C(KC_X)  , C(KC_C)  , C(KC_V)  , KC_PGUP  , _______  ,
+                  _______  , _______ , _______  ,         _______  , _______  ,                 A(KC_LEFT),  A(KC_RGHT)  , _______       , _______  , KC_PGDN
   ),
 
   [2] = LAYOUT_universal(
-    _______  ,S(KC_QUOT), KC_7     , KC_8    , KC_9     , S(KC_8)  ,                                         S(KC_9)  , S(KC_1)  , S(KC_6)  , KC_LBRC  , S(KC_4)  , _______  ,
-    _______  ,S(KC_SCLN), KC_4     , KC_5    , KC_6     , KC_RBRC  ,                                         KC_NUHS  , KC_MINS  , S(KC_EQL), S(KC_3)  , KC_QUOT  , S(KC_2)  ,
-    _______  ,S(KC_MINS), KC_1     , KC_2    , KC_3     ,S(KC_RBRC),                                        S(KC_NUHS),S(KC_INT1), KC_EQL   ,S(KC_LBRC),S(KC_SLSH),S(KC_INT3),
-                  KC_0     , KC_DOT  , _______  ,         _______  , _______  ,                   KC_DEL   , _______  , _______       , _______  , _______
+    _______  ,KC_1      , KC_2     , KC_3    , KC_4     , KC_5     ,                                         S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , S(KC_8)  ,
+    _______  ,KC_6      , KC_7     , KC_8    , KC_9     , KC_0     ,                                         JP_AT    , JP_CIRC  , JP_TILD  , JP_LBRC  , JP_RBRC  , S(KC_9)  ,
+    _______  ,S(KC_MINS), KC_1     , KC_2    , KC_3     ,S(KC_RBRC),                                         JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_GRV   , KC_DEL   ,
+                  KC_0     , KC_DOT  , _______  ,         _______  , _______  ,                   _______   , _______  , _______       , _______  , _______
   ),
 
   [3] = LAYOUT_universal(
-    _______  , _______   , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______ , _______ , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______ ,                                        _______  , MY_BACK  , MY_FORWARD  , _______ , _______  , _______  ,
-    _______ , _______  , _______  , _______  , _______  , _______ ,                                        MY_CUT  ,  MY_COPY  , MY_PASTE  , _______  , _______  , _______ ,
-                  _______  , _______  , _______  ,        _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+    KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T   ,                                       KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , JP_EQL   ,
+    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G   ,                                       KC_H     , KC_J     , KC_K     , KC_L     , JP_PLUS  , JP_QUOT  ,
+    CTL_PRNS , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B   ,                                       KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLASH , JP_SCLN ,
+               KC_LGUI  , ALT_BRCS,                   SFT_GRV , KC_BTN1, LY1_SPC,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , O24
   ),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (IS_LAYER_ON(3)) {
+    switch (keycode) {
+      case KC_S:
+      case KC_I:
+      case KC_A:
+      case KC_C:
+        if (record->event.pressed) {
+          layer_move(0);
+        }
+    }
+    return true;
+  }
   switch (keycode) {
     case JP_MINS:
       if (record->event.pressed) {
@@ -102,31 +107,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
         }
       }
-    case MY_BACK:
-      if (record->event.pressed) {
-        tap_code16(A(KC_LEFT));
-      }
-      return false;
-    case MY_FORWARD:
-      if (record->event.pressed) {
-        tap_code16(A(KC_RGHT));
-      }
-      return false;
-    case MY_COPY:
-      if (record->event.pressed) {
-        tap_code16(C(KC_C));
-      }
-      return false;
-    case MY_CUT:
-      if (record->event.pressed) {
-        tap_code16(C(KC_X));
-      }
-      return false;
-    case MY_PASTE:
-      if (record->event.pressed) {
-        tap_code16(C(KC_V));
-      }
-      return false;
     case CTL_PRNS:
       if (record->tap.count && record->event.pressed) {
         register_mods(MOD_LSFT);
@@ -142,6 +122,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code(JP_LBRC);
         tap_code(JP_RBRC);
         tap_code(KC_LEFT);
+        return false;
       }
     case KC_BTN1:
       if (record->event.pressed) {
@@ -149,7 +130,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           tap_code(KC_BTN2);
           return false;
         }
-        return true;
+      }
+    case QWERTY:
+      if (record->event.pressed) {
+        tap_code(KC_INT5);
+        tap_code(KC_ESC);
       }
   }
   return true;
@@ -157,8 +142,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // clang-format on
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Auto enable scroll mode when the highest layer is 3
-    keyball_set_scroll_mode(get_highest_layer(state) == 3);
+    // Auto enable scroll mode when the highest layer is 1
+    keyball_set_scroll_mode(get_highest_layer(state) == 1);
     return state;
 }
 
