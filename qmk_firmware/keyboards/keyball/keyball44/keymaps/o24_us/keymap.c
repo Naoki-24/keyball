@@ -130,7 +130,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case CTL_LPRN:
       if (record->tap.count && record->event.pressed) {
         register_mods(MOD_LSFT);
-        tap_code(KP_8);
+        tap_code(KC_8);
         unregister_mods(MOD_LSFT);
         return false;
       }
