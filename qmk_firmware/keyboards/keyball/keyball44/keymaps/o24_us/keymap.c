@@ -127,11 +127,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code16(C(KC_V));
       }
       return false;
-    case MY_BRCT:
-      if (record->event.pressed) {
-        SEND_STRING("[]");
-      }
-      return false;
   }
   return true;
 }
