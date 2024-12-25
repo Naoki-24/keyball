@@ -29,9 +29,19 @@ enum my_keycodes {
   MY_CUT
 };
 
-#define CTL_LPRN MT(MOD_LCTL, KC_8)
+enum {
+  TD_BRACKETS,
+  TD_PARENTHESES,
+};
+
+tap_dance_action_t tap_dance_actions[] = {
+  [TD_BRACKETS] = ACTION_TAP_DANCE_DOUTBLE(JP_LBRC, JP_RBRC),
+  [TD_PARENTHESES] = ACTION_TAP_DANCE_DOUTBLE(JP_LPRN, JP_RPRN),
+};
+
+#define CTL_LPRN MT(MOD_LCTL, TD_PARENTHESES)
 #define SFT_INT5 MT(MOD_LSFT, KC_INT5)
-#define ALT_RIGHT MT(MOD_LALT, JP_LBRC)
+#define ALT_RIGHT MT(MOD_LALT, TD_BRACKETS)
 #define LY3_INT4 LT(3, KC_INT4)
 #define LY1_SPC LT(1, KC_SPACE)
 #define LY2_ENT LT(2, KC_ENT)
@@ -127,14 +137,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code16(C(KC_V));
       }
       return false;
-    case CTL_LPRN:
-      if (record->tap.count && record->event.pressed) {
-        register_mods(MOD_LSFT);
-        tap_code(KC_8);
-        unregister_mods(MOD_LSFT);
-        return false;
+    case KC_BTN1:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) {
+          tap_code(KC_BTN2);
+          return false;
+        }
       }
-      return true;
   }
   return true;
 }
