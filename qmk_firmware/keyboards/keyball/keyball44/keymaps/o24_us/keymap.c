@@ -131,7 +131,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MY_BRCT:
       if (record->event.pressed) {
         SEND_STRING("[]");
-        return true;
+        return false;
       }
   }
   return true;
