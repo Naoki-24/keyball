@@ -22,12 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 enum my_keycodes {
-  MY_BACK = SAFE_RANGE,
+  MY_BRCT = SAFE_RANGE,
+  MY_BACK,
   MY_FORWARD,
   MY_COPY,
   MY_PASTE,
-  MY_CUT,
-  MY_BRCT
+  MY_CUT
 };
 
 #define CTL_LBRC MT(MOD_LCTL, MY_BRCT)
@@ -144,7 +144,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           SEND_STRING("[]");
           SEND_STRING(SS_TAP(X_LEFT));           
         }
-        return false;
+        return true;
       }
   }
   return true;
