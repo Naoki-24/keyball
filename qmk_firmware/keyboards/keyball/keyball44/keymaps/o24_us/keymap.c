@@ -29,7 +29,7 @@ enum my_keycodes {
   MY_CUT
 };
 
-#define CTL_LPRN MT(MOD_LCTL, KP_8)
+#define CTL_LPRN MT(MOD_LCTL, KC_8)
 #define SFT_INT5 MT(MOD_LSFT, KC_INT5)
 #define ALT_RIGHT MT(MOD_LALT, JP_LBRC)
 #define LY3_INT4 LT(3, KC_INT4)
