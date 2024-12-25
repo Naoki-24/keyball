@@ -22,17 +22,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 enum my_keycodes {
-  MY_BRCT = SAFE_RANGE,
-  MY_BACK,
+  MY_BACK = SAFE_RANGE,
   MY_FORWARD,
   MY_COPY,
   MY_PASTE,
   MY_CUT
 };
 
-#define CTL_LBRC MT(MOD_LCTL, MY_BRCT)
+#define CTL_LBRC MT(MOD_LCTL, KC_LPRN)
 #define SFT_INT5 MT(MOD_LSFT, KC_INT5)
-#define ALT_RIGHT MT(MOD_LALT, KC_RGHT)
+#define ALT_RIGHT MT(MOD_LALT, JP_LBRC)
 #define LY3_INT4 LT(3, KC_INT4)
 #define LY1_SPC LT(1, KC_SPACE)
 #define LY2_ENT LT(2, KC_ENT)
