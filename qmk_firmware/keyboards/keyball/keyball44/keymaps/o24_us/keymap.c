@@ -103,18 +103,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
         }
       }
-    case JP_RBRC:
-      if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_SHIFT) {
-          tap_code16(JP_RCBR);
-          return false;
-        }
-      }
-    case JP_LBRC:
-      if (record->event.pressed) {
-        tap_code16(JP_LCBR);
-        return false;
-      }
     case MY_BACK:
       if (record->event.pressed) {
         tap_code16(A(KC_LEFT));
@@ -142,8 +130,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case MY_BRCT:
       if (record->event.pressed) {
-        tap_code16(JP_LBRC);
-        tap_code16(JP_RBRC);
+        tap_code(JP_LBRC);
+        tap_code(JP_RBRC);
         tap_code(KC_LEFT);
         return false;
       }
