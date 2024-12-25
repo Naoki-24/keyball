@@ -26,8 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ALT_BRCS MT(MOD_LALT, KC_LBRC)
 #define LY1_SPC LT(1, KC_SPACE)
 #define LY2_ENT LT(2, KC_ENT)
-#define QWERTY DL(3)
-#define O24 DL(0)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -36,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                       KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , JP_EQL   ,
     KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINS   ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
     CTL_PRNS , KC_Z     , KC_X     , KC_C     , KC_V     , JP_SCLN   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
-               KC_LGUI  , ALT_BRCS,                   SFT_GRV , KC_BTN1, LY1_SPC,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , QWERTY
+               KC_LGUI  , ALT_BRCS,                   SFT_GRV , KC_BTN1, LY1_SPC,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , DL(3)
   ),
 
   [1] = LAYOUT_universal(
@@ -57,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T   ,                                       KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , JP_EQL   ,
     KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G   ,                                       KC_H     , KC_J     , KC_K     , KC_L     , JP_PLUS  , JP_QUOT  ,
     CTL_PRNS , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B   ,                                       KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLASH , JP_SCLN ,
-               KC_LGUI  , ALT_BRCS,                   SFT_GRV , KC_BTN1, LY1_SPC,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , O24
+               KC_LGUI  , ALT_BRCS,                   SFT_GRV , KC_BTN1, LY1_SPC,            KC_BSPC  , LY2_ENT    , KC_0     , KC_PSCR  , DL(0)
   ),
 };
 
@@ -131,7 +129,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
         }
       }
-    case QWERTY:
+    case DL(0):
       if (record->event.pressed) {
         tap_code(KC_INT5);
         tap_code(KC_ESC);
