@@ -29,7 +29,7 @@ enum my_keycodes {
   MY_CUT
 };
 
-#define CTL_LPRN MT(MOD_LCTL, JP_LPRN)
+#define CTL_LPRN MT(MOD_LCTL, KP_8)
 #define SFT_INT5 MT(MOD_LSFT, KC_INT5)
 #define ALT_RIGHT MT(MOD_LALT, JP_LBRC)
 #define LY3_INT4 LT(3, KC_INT4)
@@ -127,6 +127,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code16(C(KC_V));
       }
       return false;
+    case CTL_LPRN:
+      if (record->tap.count && record->event.pressed) {
+        register_mods(MOD_LSFT);
+        tap_code(KP_8);
+        unregister_mods(MOD_LSFT);
+        return false;
+      }
+      return true;
   }
   return true;
 }
