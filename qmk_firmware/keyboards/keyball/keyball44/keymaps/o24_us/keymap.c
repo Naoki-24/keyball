@@ -119,7 +119,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     case TG(3):
       if (record->event.pressed) {
-        if (on_layer(3)) {
+        if (layer_on(3)) {
           tap_code(KC_INT4); //無変換
         } else {
           tap_code(KC_INT5); //変換
