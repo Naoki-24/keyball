@@ -88,7 +88,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true;
     case JP_SCLN:
       if (record->event.pressed) {
-        mods = get_mods();
+        uint8_t mods = get_mods();
         if (mods & MOD_MASK_SHIFT) {
           unregister_mods(MOD_MASK_SHIFT);
           tap_code(JP_COLN);
@@ -122,7 +122,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     case TG(1):
       if (record->event.pressed) {
-        if (IS_LAYER_ON(1)) {
+        if (IS_LAYER_ON(0)) {
           tap_code(KC_INT4); //無変換
         } else {
           tap_code(KC_INT5); //変換
