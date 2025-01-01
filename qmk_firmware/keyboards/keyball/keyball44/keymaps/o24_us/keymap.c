@@ -109,7 +109,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (get_mods() & MOD_MASK_SHIFT) {
           unregister_mods(MOD_MASK_SHIFT);
           tap_code(JP_COLN);
-          register_mods(MOD_MASK_SHIFT);
           return false;
         }
       }
