@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [2] = LAYOUT_universal(
-    KC_F1    ,  KC_F2   , KC_F3    , KC_F4   , KC_F5    , KC_F6    ,                                         C(KC_Y)  , _______  , RCS(KC_C), RCS(KC_V), _______  , _______  ,
+    KC_F1    ,  KC_F2   , KC_F3    , KC_F4   , KC_F5    , KC_F6    ,                                         C(KC_Y)  , _______  , RCS(KC_C), RCS(KC_V), RGUI(KC_LEFT),RGUI(KC_RGTH),
     KC_F7    ,  KC_F8   , KC_F9    , KC_F10  , KC_F11   , KC_F12   ,                                         KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , C(KC_S)  , C(KC_A)  , 
     _______  ,  _______ , KC_LEFT  , KC_UP   , KC_DOWN  , KC_RGHT  ,                                         C(KC_Z)  , C(KC_X)  , C(KC_C)  , C(KC_V)  , KC_PGUP  , _______  ,
                   _______  , _______ , _______  ,         _______  , _______  ,                 A(KC_LEFT),  A(KC_RGHT)  , _______       , _______  , KC_PGDN
@@ -123,9 +123,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TG(1):
       if (record->event.pressed) {
         if (IS_LAYER_ON(0)) {
-          tap_code(KC_INT4); //無変換
+          tap_code(KC_INT5); //無変換
         } else {
-          tap_code(KC_INT5); //変換
+          tap_code(KC_INT4); //変換
         }
       }
   }
