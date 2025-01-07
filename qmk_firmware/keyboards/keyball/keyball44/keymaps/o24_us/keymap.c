@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______  ,KC_1      , KC_2     , KC_3    , KC_4     , KC_5     ,                                         S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , S(KC_8)  ,
     _______  ,KC_6      , KC_7     , KC_8    , KC_9     , KC_0     ,                                         JP_AT    , JP_CIRC  , JP_TILD  , JP_LBRC  , JP_RBRC  , S(KC_9)  ,
     _______  ,S(KC_MINS), _______  , _______ , JP_PLUS  , JP_EQL   ,                                         JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_EQL   , JP_PLUS  ,
-                  KC_0     , KC_DOT  , _______  ,         _______  , _______  ,                   _______   , _______  , _______       , _______  , KC_DEL
+                  KC_0     , KC_DOT  , _______  ,         KC_BTN2  , _______  ,                   _______   , _______  , _______       , _______  , KC_DEL
   ),
 
 
@@ -112,13 +112,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code(JP_RBRC);
         tap_code(KC_LEFT);
         return false;
-      }
-    case KC_BTN1:
-      if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_ALT) {
-          tap_code(KC_BTN2);
-          return false;
-        }
       }
     case TG(1):
       if (record->event.pressed) {
