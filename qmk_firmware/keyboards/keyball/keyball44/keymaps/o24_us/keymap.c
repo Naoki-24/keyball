@@ -53,9 +53,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [3] = LAYOUT_universal(
-    KC_ESC   , KC_1     , KC_2     , KC_3     , KC_4     , KC_5     ,                                         S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , S(KC_8)  ,
-    KC_TAB   , KC_6     , KC_7     , KC_8     , KC_9     , KC_0     ,                                         JP_AT    , JP_CIRC  , JP_TILD  , JP_LBRC  , JP_RBRC  , S(KC_9)  ,
-    CTL_PRNS , _______  , _______  , _______  , JP_EQL   , JP_PLUS  ,                                         JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_GRV   , JP_PLUS  ,
+    KC_ESC   , KC_1     , KC_2     , KC_3     , KC_4     , KC_5     ,                                         S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , KC_BSPC  ,
+    KC_TAB   , KC_6     , KC_7     , KC_8     , KC_9     , KC_0     ,                                         S(KC_8)  , S(KC_9)  , JP_LBRC  , JP_RBRC  , JP_AT    , JP_CIRC  ,
+    CTL_PRNS , _______  , _______  , _______  , JP_EQL   , JP_PLUS  ,                                         JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_TILD  , JP_GRV  ,
                   _______  , _______  , _______  ,         KC_BTN2  , _______  ,                   _______   , _______  , _______       , _______  , KC_DEL
   ),
 };
