@@ -105,13 +105,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
     case ALT_BRCS:
-      mod = get_mods();
+      uint8_t mods = get_mods();
       if (record->tap.count && record->event.pressed) {
         tap_code(JP_LBRC);
         tap_code(JP_RBRC);
         unregister_mods(MOD_MASK_ALT);
         tap_code(KC_LEFT);
-        set_mods(mod);
+        set_mods(mods);
         return false;
       }
     case TG(1):
