@@ -22,10 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 #define CTL_PRNS MT(MOD_LCTL, KC_8)
-#define SFT_INT5 MT(MOD_LSFT, KC_INT5)
+#define SFT_SPC MT(MOD_LSFT, KC_SPC)
 #define ALT_BRCS MT(MOD_LALT, KC_LBRC)
-#define LY2_SPC LT(2, KC_SPACE)
-#define LY3_ENT LT(3, KC_ENT)
+#define LY2_INT5 LT(2, KC_INT5)
+#define LY3_INT4 LT(3, KC_INT4)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -34,7 +34,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                       KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , KC_BSPC  ,
     KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINS   ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
     CTL_PRNS , KC_Z     , KC_X     , KC_C     , KC_V     , JP_SCLN   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
-               KC_LGUI  , ALT_BRCS,                   LY2_SPC , KC_BTN1, LY3_ENT,              KC_INT4  , SFT_INT5    , KC_0     , KC_PSCR  , TG(1)
+               KC_LGUI  , ALT_BRCS,                   LY2_INT5, KC_BTN1, KC_ENT,              LY3_INT4  , SFT_SPC     , KC_0     , KC_PSCR  , TG(1)
+
   ),
 
   [1] = LAYOUT_universal(
@@ -52,9 +53,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [3] = LAYOUT_universal(
-    S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , S(KC_8)  ,                                         KC_1     , KC_2     , KC_3     , KC_4     , KC_5     , KC_BSPC ,
-    JP_AT    , JP_CIRC  , JP_TILD  , JP_LBRC  , JP_RBRC  , S(KC_9)  ,                                         KC_6     , KC_7     , KC_8     , KC_9     , KC_0     , JP_PLUS ,
-    JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_GRV   , JP_PLUS  ,                                         _______  , _______  , _______  , _______  , _______  , JP_EQL  ,
+    KC_ESC   , KC_1     , KC_2     , KC_3     , KC_4     , KC_5     ,                                         S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , S(KC_8)  ,
+    KC_TAB   , KC_6     , KC_7     , KC_8     , KC_9     , KC_0     ,                                         JP_AT    , JP_CIRC  , JP_TILD  , JP_LBRC  , JP_RBRC  , S(KC_9)  ,
+    CTL_PRNS , _______  , _______  , _______  , JP_EQL   , JP_PLUS  ,                                         JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_GRV   , JP_PLUS  ,
                   _______  , _______  , _______  ,         KC_BTN2  , _______  ,                   _______   , _______  , _______       , _______  , KC_DEL
   ),
 };
