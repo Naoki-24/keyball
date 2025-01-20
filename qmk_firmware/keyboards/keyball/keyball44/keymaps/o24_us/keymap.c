@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [3] = LAYOUT_universal(
     S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , S(KC_8)  ,                                         KC_1     , KC_2     , KC_3     , KC_4     , KC_5     , KC_BSPC ,
     JP_AT    , JP_CIRC  , JP_TILD  , JP_LBRC  , JP_RBRC  , S(KC_9)  ,                                         KC_6     , KC_7     , KC_8     , KC_9     , KC_0     , JP_PLUS ,
-    JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_EQL   , JP_PLUS  ,                                         _______  , _______  , _______  , _______  , _______  , JP_EQL  ,
+    JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_GRV   , JP_PLUS  ,                                         _______  , _______  , _______  , _______  , _______  , JP_EQL  ,
                   _______  , _______  , _______  ,         KC_BTN2  , _______  ,                   _______   , _______  , _______       , _______  , KC_DEL
   ),
 };
@@ -105,11 +105,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
     case ALT_BRCS:
+      uint8_t mods = get_mods();
       if (record->tap.count && record->event.pressed) {
-        uint8_t mods = get_mods();
         tap_code(JP_LBRC);
         tap_code(JP_RBRC);
-        unregister_mods(MOD_MASK_SHIFT);
+        unregister_mods(MOD_MASK_ALT);
         tap_code(KC_LEFT);
         set_mods(mods);
         return false;
