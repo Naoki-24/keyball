@@ -105,11 +105,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
     case ALT_BRCS:
-      uint8_t mods = get_mods();
       if (record->tap.count && record->event.pressed) {
+        uint8_t mods = get_mods();
         tap_code(JP_LBRC);
         tap_code(JP_RBRC);
-        unregister_mods(MOD_MASK_ALT);
+        unregister_mods(MOD_MASK_SHIFT);
         tap_code(KC_LEFT);
         set_mods(mods);
         return false;
