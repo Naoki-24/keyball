@@ -34,14 +34,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT    ,                                       KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , KC_BSPC  ,
     KC_TAB   , KC_E     , KC_I     , KC_A     , KC_O     , JP_MINS   ,                                       KC_K     , KC_T     , KC_N     , KC_S     , KC_H     , JP_QUOT  ,
     CTL_PRNS , KC_Z     , KC_X     , KC_C     , KC_V     , JP_SCLN   ,                                       KC_G     , KC_D     , KC_M     , KC_J     , KC_B     , KC_SLASH ,
-               KC_LGUI  , ALT_BRCS,                   LY2_SPC , KC_BTN1, SFT_INT5,              KC_INT4  , LY3_ENT    , KC_0     , KC_PSCR  , TG(1)
+               KC_LGUI  , ALT_BRCS,                   LY2_SPC , KC_BTN1, LY3_ENT,              KC_INT4  , SFT_INT5    , KC_0     , KC_PSCR  , TG(1)
   ),
 
   [1] = LAYOUT_universal(
-    KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T   ,                                       KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_BSPC  ,
-    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G   ,                                       KC_H     , KC_J     , KC_K     , KC_L     , JP_SCLN  , JP_QUOT  ,
-    CTL_PRNS , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B   ,                                       KC_N     , KC_M     , KC_COMM  , KC_DOT   , JP_MINS  , KC_SLASH ,
-               KC_LGUI  , ALT_BRCS,                   LY2_SPC , KC_BTN1, SFT_INT5 ,                 KC_INT4  , LY3_ENT    , KC_0     , KC_PSCR  , TG(1)
+    _______  , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T   ,                                       KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    _______  , KC_A     , KC_S     , KC_D     , KC_F     , KC_G   ,                                       KC_H     , KC_J     , KC_K     , KC_L     , JP_SCLN  , _______  ,
+    _______  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B   ,                                       KC_N     , KC_M     , KC_COMM  , KC_DOT   , JP_MINS  , _______  ,
+               _______  , _______  ,                _______ , _______, _______,                 _______  , _______    , _______     , _______  , _______
   ),
 
   [2] = LAYOUT_universal(
@@ -52,13 +52,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [3] = LAYOUT_universal(
-    _______  ,KC_1      , KC_2     , KC_3    , KC_4     , KC_5     ,                                         S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , S(KC_8)  ,
-    _______  ,KC_6      , KC_7     , KC_8    , KC_9     , KC_0     ,                                         JP_AT    , JP_CIRC  , JP_TILD  , JP_LBRC  , JP_RBRC  , S(KC_9)  ,
-    _______  ,S(KC_MINS), _______  , _______ , JP_PLUS  , JP_EQL   ,                                         JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_EQL   , JP_PLUS  ,
-                  KC_0     , KC_DOT  , _______  ,         KC_BTN2  , _______  ,                   _______   , _______  , _______       , _______  , KC_DEL
+    S(KC_1)  , S(KC_3)  , S(KC_4)  , S(KC_5)  , S(KC_6)  , S(KC_8)  ,                                         KC_1     , KC_2     , KC_3     , KC_4     , KC_5     , KC_BSPC ,
+    JP_AT    , JP_CIRC  , JP_TILD  , JP_LBRC  , JP_RBRC  , S(KC_9)  ,                                         KC_6     , KC_7     , KC_8     , KC_9     , KC_0     , JP_PLUS ,
+    JP_CAPS  , JP_ASTR  , JP_YEN   , JP_PIPE  , JP_EQL   , JP_PLUS  ,                                         _______  , _______  , _______  , _______  , _______  , JP_EQL  ,
+                  _______  , _______  , _______  ,         KC_BTN2  , _______  ,                   _______   , _______  , _______       , _______  , KC_DEL
   ),
-
-
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -107,10 +105,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
     case ALT_BRCS:
+      mod = get_mods();
       if (record->tap.count && record->event.pressed) {
         tap_code(JP_LBRC);
         tap_code(JP_RBRC);
+        unregister_mods(MOD_MASK_ALT);
         tap_code(KC_LEFT);
+        set_mods(mod);
         return false;
       }
     case TG(1):
