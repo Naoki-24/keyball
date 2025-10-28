@@ -105,7 +105,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       return true;
-    case ALT_BRCS:
+    case OS_BRCS:
       if (record->tap.count && record->event.pressed) {
         uint8_t mods = get_mods();
         tap_code(JP_LBRC);
